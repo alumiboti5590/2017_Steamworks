@@ -57,7 +57,9 @@ public class Drivetrain extends Subsystem {
     }
     
     
-    
+    public boolean setSpeedandDistance(double speed, double distance){
+    	return true;
+    }
     /**
      * This method will be called to STOP the robot.
      */
