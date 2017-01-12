@@ -18,8 +18,8 @@ public class XboxController extends Joystick {
 			buttonSelect,
 			buttonStart,
 			buttonLogo;
-	Trigger leftTrigger;
-	Trigger	rightTrigger;	
+	public Trigger leftBumper;
+	public Trigger	rightBumper;	
 	
 	public XboxController(int port) {
 		super(port);
@@ -30,8 +30,8 @@ public class XboxController extends Joystick {
 		buttonSelect= new JoystickButton(this, 5);
 		buttonStart = new JoystickButton(this, 6);
 		buttonLogo = new JoystickButton(this, 7);
-		leftTrigger = new JoystickButton(this, 8);
-		rightTrigger = new JoystickButton(this, 9);
+		leftBumper = new JoystickButton(this, 8);
+		rightBumper = new JoystickButton(this, 9);
 	}
 
 	public double getLeftTrigger() {

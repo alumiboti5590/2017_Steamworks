@@ -41,6 +41,8 @@ public class Drivetrain extends Subsystem {
      * motors according to the joystick controllers.
      */
     public void joystickSpeed() {
+    	
+    	
     	double left = Robot.oi.xbox.getLeftStickY();
     	double right = Robot.oi.xbox.getRightStickY();
     	
@@ -48,6 +50,8 @@ public class Drivetrain extends Subsystem {
     	double validRight = this.ensureRange(right, MINSPEED, MAXSPEED);
     	
     	robotDrive.tankDrive(validLeft, validRight);
+    	
+    	Robot.oi.xbox.getRightTrigger();
     }
     
     
@@ -74,6 +78,8 @@ public class Drivetrain extends Subsystem {
     	this.setSpeed(0);
     	
     }
+    
+    
     
     private  double ensureRange(double value, double min, double max) {
     	return Math.min(Math.max(value, min), max);
