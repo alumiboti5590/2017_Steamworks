@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5590.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team5590.robot.commands.ExampleCommand;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
