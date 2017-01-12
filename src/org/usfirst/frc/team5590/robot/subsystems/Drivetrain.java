@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
+import org.usfirst.frc.team5590.robot.Robot;
+
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -33,7 +35,13 @@ public class Drivetrain extends Subsystem {
      * motors according to the joystick controllers.
      */
     public void joystickSpeed() {
+    	double left = Robot.oi.xbox.getLeftStickY();
+    	double right = Robot.oi.xbox.getRightStickY();
     	
+    	double validLeft = this.ensureRange(left, MINSPEED, MAXSPEED);
+    	double validRight = this.ensureRange(right, MINSPEED, MAXSPEED);
+    	
+    	robotDrive.tankDrive(validLeft, validRight);
     }
     
     
