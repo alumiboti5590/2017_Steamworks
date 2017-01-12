@@ -2,8 +2,11 @@ package org.usfirst.frc.team5590.robot.subsystems;
 
 import org.usfirst.frc.team5590.robot.Robot;
 
+import edu.wpi.first.wpilibj.AnalogAccelerometer;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  *This is the subsystem to represent the Drivetrain
@@ -15,12 +18,15 @@ public class Drivetrain extends Subsystem {
     private static final int RIGHTCONTROLLERPWM = 0;
     private static final double MINSPEED = -1.0;
     private static final double MAXSPEED = 1.0;
+    private static final double KP = .03;
     // RobotDrive from FRC
     private RobotDrive robotDrive;
+    private Gyro gyro;
     
     
     public Drivetrain(){
     	robotDrive = new RobotDrive(LEFTCONTROLLERPWM, RIGHTCONTROLLERPWM);
+    	gyro = new AnalogGyro(1);
     }
 
     
@@ -53,7 +59,8 @@ public class Drivetrain extends Subsystem {
     	//This ensures that the speed received is valid
     	double validSpeed = this.ensureRange(speed, MINSPEED, MAXSPEED);
     	
-    	robotDrive.arcadeDrive(validSpeed, 0);
+    	double angle = gyro.getAngle();
+    	robotDrive.drive(validSpeed, -angle * KP);
     }
     
     
