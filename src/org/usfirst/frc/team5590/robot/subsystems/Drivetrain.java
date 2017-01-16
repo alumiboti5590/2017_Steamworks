@@ -26,6 +26,8 @@ public class Drivetrain extends Subsystem {
     
     public Drivetrain(){
     	robotDrive = new RobotDrive(LEFTCONTROLLERPWM, RIGHTCONTROLLERPWM);
+    	robotDrive.setSafetyEnabled(false);
+    	robotDrive.setExpiration(.1);
     	gyro = new AnalogGyro(1);
     }
 
@@ -42,9 +44,15 @@ public class Drivetrain extends Subsystem {
      */
     public void joystickSpeed() {
     	
+    	double left, right;
     	
-    	double left = Robot.oi.xbox.getLeftStickY();
-    	double right = Robot.oi.xbox.getRightStickY();
+    	if (Robot.oi.xbox.leftBumper.get()) {
+    		left = Robot.oi.xbox.getLeftStickY();
+    		right = Robot.oi.xbox.getRightStickY();
+    	} else {
+    		left = -1 * Robot.oi.xbox.getRightStickY();
+    		right = -1 * Robot.oi.xbox.getLeftStickY();
+    	}
     	
     	double validLeft = this.ensureRange(left, MINSPEED, MAXSPEED);
     	double validRight = this.ensureRange(right, MINSPEED, MAXSPEED);

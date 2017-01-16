@@ -18,8 +18,8 @@ public class XboxController extends Joystick {
 			buttonSelect,
 			buttonStart,
 			buttonLogo;
-	public Trigger leftBumper;
-	public Trigger	rightBumper;	
+	public Button leftBumper;
+	public Button rightBumper;	
 	
 	public XboxController(int port) {
 		super(port);
