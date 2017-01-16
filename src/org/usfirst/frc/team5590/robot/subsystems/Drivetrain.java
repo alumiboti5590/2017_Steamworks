@@ -2,8 +2,11 @@ package org.usfirst.frc.team5590.robot.subsystems;
 
 import org.usfirst.frc.team5590.robot.Robot;
 
+import edu.wpi.first.wpilibj.AnalogAccelerometer;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  *This is the subsystem to represent the Drivetrain
@@ -15,12 +18,17 @@ public class Drivetrain extends Subsystem {
     private static final int RIGHTCONTROLLERPWM = 0;
     private static final double MINSPEED = -1.0;
     private static final double MAXSPEED = 1.0;
+    private static final double KP = .03;
     // RobotDrive from FRC
     private RobotDrive robotDrive;
+    private Gyro gyro;
     
     
     public Drivetrain(){
     	robotDrive = new RobotDrive(LEFTCONTROLLERPWM, RIGHTCONTROLLERPWM);
+    	robotDrive.setSafetyEnabled(false);
+    	robotDrive.setExpiration(.1);
+    	gyro = new AnalogGyro(1);
     }
 
     
@@ -35,13 +43,23 @@ public class Drivetrain extends Subsystem {
      * motors according to the joystick controllers.
      */
     public void joystickSpeed() {
-    	double left = Robot.oi.xbox.getLeftStickY();
-    	double right = Robot.oi.xbox.getRightStickY();
+    	
+    	double left, right;
+    	
+    	if (Robot.oi.xbox.leftBumper.get()) {
+    		left = Robot.oi.xbox.getLeftStickY();
+    		right = Robot.oi.xbox.getRightStickY();
+    	} else {
+    		left = -1 * Robot.oi.xbox.getRightStickY();
+    		right = -1 * Robot.oi.xbox.getLeftStickY();
+    	}
     	
     	double validLeft = this.ensureRange(left, MINSPEED, MAXSPEED);
     	double validRight = this.ensureRange(right, MINSPEED, MAXSPEED);
     	
     	robotDrive.tankDrive(validLeft, validRight);
+    	
+    	Robot.oi.xbox.getRightTrigger();
     }
     
     
@@ -53,11 +71,14 @@ public class Drivetrain extends Subsystem {
     	//This ensures that the speed received is valid
     	double validSpeed = this.ensureRange(speed, MINSPEED, MAXSPEED);
     	
-    	robotDrive.arcadeDrive(validSpeed, 0);
+    	double angle = gyro.getAngle();
+    	robotDrive.drive(validSpeed, -angle * KP);
     }
     
     
-    
+    public boolean setSpeedandDistance(double speed, double distance){
+    	return true;
+    }
     /**
      * This method will be called to STOP the robot.
      */
@@ -65,6 +86,8 @@ public class Drivetrain extends Subsystem {
     	this.setSpeed(0);
     	
     }
+    
+    
     
     private  double ensureRange(double value, double min, double max) {
     	return Math.min(Math.max(value, min), max);
