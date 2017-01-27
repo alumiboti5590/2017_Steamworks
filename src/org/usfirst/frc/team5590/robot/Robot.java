@@ -64,7 +64,9 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
+    	
+    	drivetrain.setSpeed(.3);
+    	
     }
 
     public void teleopInit() {
@@ -73,6 +75,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        drivetrain.stop();
         
     }
 

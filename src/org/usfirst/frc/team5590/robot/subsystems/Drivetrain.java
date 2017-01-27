@@ -18,7 +18,11 @@ public class Drivetrain extends Subsystem {
     private static final int RIGHTCONTROLLERPWM = 0;
     private static final double MINSPEED = -1.0;
     private static final double MAXSPEED = 1.0;
+    
     private static final double KP = .03;
+    private static final double DEADZONE_TOLERANCE_LEFT = .15;
+    private static final double DEADZONE_TOLERANCE_RIGHT = .18;
+    
     // RobotDrive from FRC
     private RobotDrive robotDrive;
     private Gyro gyro;
@@ -46,20 +50,21 @@ public class Drivetrain extends Subsystem {
     	
     	double left, right;
     	
-    	if (Robot.oi.xbox.leftBumper.get()) {
-    		left = Robot.oi.xbox.getLeftStickY();
-    		right = Robot.oi.xbox.getRightStickY();
+    	System.out.println(Robot.oi.xbox.rightBumper.get());
+    	
+    	if (Robot.oi.xbox.getRightTrigger() < .5) {
+    		// Standard drive
+			left = -1 * Robot.oi.xbox.getLeftStickY();
+			right = -1 * Robot.oi.xbox.getRightStickY();
     	} else {
-    		left = -1 * Robot.oi.xbox.getRightStickY();
-    		right = -1 * Robot.oi.xbox.getLeftStickY();
+    		left = Robot.oi.xbox.getRightStickY();
+    		right = Robot.oi.xbox.getLeftStickY();
     	}
     	
-    	double validLeft = this.ensureRange(left, MINSPEED, MAXSPEED);
-    	double validRight = this.ensureRange(right, MINSPEED, MAXSPEED);
+    	double validLeft =  ensureDeadzone(this.ensureRange(left, MINSPEED, MAXSPEED), DEADZONE_TOLERANCE_LEFT);
+    	double validRight = ensureDeadzone(this.ensureRange(right, MINSPEED, MAXSPEED), DEADZONE_TOLERANCE_RIGHT);
     	
     	robotDrive.tankDrive(validLeft, validRight);
-    	
-    	Robot.oi.xbox.getRightTrigger();
     }
     
     
@@ -72,7 +77,7 @@ public class Drivetrain extends Subsystem {
     	double validSpeed = this.ensureRange(speed, MINSPEED, MAXSPEED);
     	
     	double angle = gyro.getAngle();
-    	robotDrive.drive(validSpeed, -angle * KP);
+    	robotDrive.drive(-validSpeed, -angle * KP);
     }
     
     
@@ -92,6 +97,14 @@ public class Drivetrain extends Subsystem {
     private  double ensureRange(double value, double min, double max) {
     	return Math.min(Math.max(value, min), max);
     	
+    }
+    
+    private double ensureDeadzone(double speed, double tolerance) {
+    	double pos = Math.abs(speed);
+    	if (pos < tolerance) {
+    		return 0;
+    	}
+    	return speed;
     }
     
     
