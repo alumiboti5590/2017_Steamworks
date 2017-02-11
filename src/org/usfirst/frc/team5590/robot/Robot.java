@@ -5,7 +5,9 @@ import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5590.robot.subsystems.GearHolder;
 import org.usfirst.frc.team5590.robot.subsystems.GearPusher;
 import org.usfirst.frc.team5590.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team5590.robot.subsystems.RopeGrabber;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -26,6 +28,8 @@ public class Robot extends IterativeRobot {
     public static final GearHolder gearHolder = new GearHolder();
     public static final GearPusher gearPusher = new GearPusher();
     public static final RopeClimber ropeClimber = new RopeClimber();
+    public static final RopeGrabber ropeGrabber = new RopeGrabber();
+    public static final Compressor compressor = new Compressor();
     public static OI oi;
 
     Command autonomousCommand;
