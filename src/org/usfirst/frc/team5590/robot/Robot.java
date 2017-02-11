@@ -1,13 +1,16 @@
 
 package org.usfirst.frc.team5590.robot;
 
+import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team5590.robot.subsystems.GearHolder;
+import org.usfirst.frc.team5590.robot.subsystems.GearPusher;
+import org.usfirst.frc.team5590.robot.subsystems.RopeClimber;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,6 +23,9 @@ public class Robot extends IterativeRobot {
 
 
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final GearHolder gearHolder = new GearHolder();
+    public static final GearPusher gearPusher = new GearPusher();
+    public static final RopeClimber ropeClimber = new RopeClimber();
     public static OI oi;
 
     Command autonomousCommand;
