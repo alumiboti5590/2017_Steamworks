@@ -10,10 +10,12 @@ public class GearHolder extends Subsystem{
 	private static final int SOLENOID_IN = 2;
 	private static final int SOLENOID_OUT = 3;
 	
-	DoubleSolenoid gearHolder = new DoubleSolenoid(SOLENOID_IN,SOLENOID_OUT);
+	DoubleSolenoid gearHolder;
 	public void initDefaultCommand(){
 		//Set the default command for a subsystem here.
 		//setDefaultCommand(new MySpecialCommand());
+		gearHolder = new DoubleSolenoid(SOLENOID_IN,SOLENOID_OUT);
+		gearHolder.set(DoubleSolenoid.Value.kOff);
 	}
 	public void holderOpen(){
 		gearHolder.set(DoubleSolenoid.Value.kForward);

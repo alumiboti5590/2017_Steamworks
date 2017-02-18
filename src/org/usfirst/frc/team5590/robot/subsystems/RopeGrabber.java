@@ -19,7 +19,7 @@ public class RopeGrabber extends Subsystem {
 	private static final double DISTANCE_PER_PULSE = .02213280569; // inches
 
 	// 497 counts / 1 revolution (360 degrees)
-	private static final double DEGREES_PER_PULSE = 1.3805555556;
+	private static final double DEGREES_PER_PULSE = 0.789;
 
 	// creates a variable for the speed controller PWM
 	private static final int ROPE_GRAB_PWM = 3;
@@ -27,7 +27,7 @@ public class RopeGrabber extends Subsystem {
 	// Error allowed
 	private static final double ERROR_ALLOWED = .3;
 	
-	private static final double SPEED_MULTIPLYER = 1.0;
+	private static final double SPEED_MULTIPLIER = 0.5;
 
 	// Non-static variables
 	public static boolean isFinished = false;
@@ -46,43 +46,20 @@ public class RopeGrabber extends Subsystem {
 	public void moveDistance(double degrees) {
 		
 		// Stop the motor if in the allowed distance
-		if (Math.abs(getDegrees() - degrees) < ERROR_ALLOWED) {
+		if (getDegrees() > degrees) {
 			grabSpeed.stopMotor();
 			isFinished = true;
+			return;
 		}
 		
 		double validSpeed;
+		
+		validSpeed = ensureRange(0.2, -1, 1);
+		grabSpeed.set(validSpeed);
+		
+		System.out.println("Raw degrees " + getDegrees());
 
-		switch (getMotorProgress(degrees)) {
-
-		// Fast motor
-		case 0:
-			// Code here
-			validSpeed = ensureRange(1 * SPEED_MULTIPLYER, -1, 1);
-			grabSpeed.set(validSpeed);
-			break;
-
-		// Medium motor
-		case 1:
-			// Code here
-			validSpeed = ensureRange(.5 * SPEED_MULTIPLYER, -1, 1);
-			grabSpeed.set(validSpeed);
-			break;
-
-		// Slow motor
-		case 2:
-			// Code here
-			validSpeed = ensureRange(.2 * SPEED_MULTIPLYER, -1, 1);
-			grabSpeed.set(validSpeed);
-			break;
-
-		// Fix case
-		case 3:
-			// Code here
-			grabSpeed.set(-.1);
-			break;
-
-		}
+	
 	}
 
 	public void resetGrabEnc() {
@@ -101,32 +78,6 @@ public class RopeGrabber extends Subsystem {
 		return DEGREES_PER_PULSE * grabEnc.get();
 	}
 
-	private int getMotorProgress(double degreesToMove) {
-		
-		double degrees = getDegrees();
-		
-		// If overshot
-		if (degreesToMove < degrees) {
-			return 3;
-		}
-		
-		// What we are doing below
-		//
-		//   0            .6   .83     d
-		//   |-------------|-----|-----|
-		
-		// Figure out how fast to go
-		if ((.83333 * degreesToMove) < degrees) {
-			// Slow motor
-			return 2;
-		} else if ((.66666 * degreesToMove) < degrees) {
-			// Medium Speed
-			return 1;
-		} else {
-			// Fast speed
-			return 0;
-		}
-	}
 
 	private double ensureRange(double value, double min, double max) {
 		return Math.min(Math.max(value, min), max);

@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+
+import org.usfirst.frc.team5590.robot.Robot;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -35,42 +38,33 @@ public class RopeClimber extends Subsystem {
 
 	// constructs the speed controller and the encoder
 	public RopeClimber() {
-		climbEnc = new Encoder(ROTATIONAL_ENCODER_SIGNAL_INPUT, ROTATIONAL_ENCODER_SIGNAL_OUTPUT, false,
+		climbEnc = new Encoder(ROTATIONAL_ENCODER_SIGNAL_INPUT, ROTATIONAL_ENCODER_SIGNAL_OUTPUT, true,
 				EncodingType.k2X);
 		climbEnc.setDistancePerPulse(DISTANCE_PER_PULSE);
 		ropeSpeed = new TalonSRX(ROPE_CLIMB_PWM);
+		
+		ropeSpeed.stopMotor();
+		
 	}
 
 	// sets the speed controller to a speed while the encoder count is less than
 	// a certain number
 	public void moveDistance(double inches) {
+		
+		Robot.compressor.stop();
+		
 		if ((Math.abs(climbEnc.getDistance() - inches) < ERROR_ALLOWED)) {
 			ropeSpeed.stopMotor();
 			isFinished = true;
+			return;
 		}
 		
 		double validSpeed;
-		switch (getMotorProgress(inches)) {
-
 		
-		// Fast speed
-		case 0:
-			validSpeed =  ensureRange(1 * SPEED_MULTIPLIER, -1, 1);
-			ropeSpeed.set(validSpeed);
-			break;
+		validSpeed = ensureRange(1.0 * SPEED_MULTIPLIER, -1, 1);
+		ropeSpeed.set(validSpeed);
 		
-		// Medium speed
-		case 1:
-			validSpeed = ensureRange(0.7 * SPEED_MULTIPLIER, -1, 1);
-			ropeSpeed.set(validSpeed);
-			break;
-
-		// Slow speed
-		case 2:
-			validSpeed = ensureRange(0.3 * SPEED_MULTIPLIER, -1, 1);
-			ropeSpeed.set(validSpeed);
-			break;
-		}
+		System.out.println("Raw distance " + climbEnc.getDistance());
 	}
 
 	// resets the encoder count and sets the speed controller to 0
@@ -87,24 +81,6 @@ public class RopeClimber extends Subsystem {
 		climbEnc.reset();
 	}
 
-	// Returns how far the motor has traveled
-	private int getMotorProgress(double inchesToMove) {
-		double inches = climbEnc.getDistance();
-		
-		if((0.83333 * inchesToMove) < inches){
-			//Slow motor speed is used
-			return 2;
-		}
-		else if((0.6666 * inchesToMove) < inches){
-			//Medium motor speed is used
-			return 1;
-		}
-		else{
-			//Fast motor speed is used
-			return 0;
-		}
-		
-	}
 
 	// ensures the speed value is between -1.0 and 1.0
 	private double ensureRange(double value, double min, double max) {

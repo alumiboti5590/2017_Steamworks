@@ -20,6 +20,7 @@ public class RopeClimb extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Starting Climb");
     	Robot.ropeClimber.resetEncoder();
     }
 
@@ -36,6 +37,7 @@ public class RopeClimb extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Ending Climb");
     	Robot.ropeClimber.isFinished = false;
     }
 

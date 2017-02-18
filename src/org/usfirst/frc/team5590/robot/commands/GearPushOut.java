@@ -25,11 +25,12 @@ public class GearPushOut extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	// Method to push the pusher out
-    	Robot.gearPusher.pusherExtend();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.gearPusher.pusherExtend();
     }
 
     // Make this return true when this Command no longer needs to run execute()

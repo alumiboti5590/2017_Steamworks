@@ -50,8 +50,6 @@ public class Drivetrain extends Subsystem {
     	
     	double left, right;
     	
-    	System.out.println(Robot.oi.xbox.rightBumper.get());
-    	
     	if (Robot.oi.xbox.getRightTrigger() < .5) {
     		// Standard drive
 			left = -1 * Robot.oi.xbox.getLeftStickY();

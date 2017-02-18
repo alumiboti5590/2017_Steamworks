@@ -16,6 +16,7 @@ public class GearPusher extends Subsystem {
 	public GearPusher() {
 		// Create a DoubleSolenoid
 		gearPusher = new DoubleSolenoid(SOLENOID_IN, SOLENOID_OUT);
+		gearPusher.set(DoubleSolenoid.Value.kOff);
 	}
 
 	public void initDefaultCommand() {

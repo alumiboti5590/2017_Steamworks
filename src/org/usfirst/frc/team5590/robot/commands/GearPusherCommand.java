@@ -8,11 +8,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class GearPusherCommand extends CommandGroup {
     private static final double PUSHERSECONDS = 1;
     private static final double HOLDERSECONDS = 1;
+    
+    
     public  GearPusherCommand() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
+    	
+    	
     	addSequential(new GearHolderOpen(HOLDERSECONDS));
     	addSequential(new GearPushOut(PUSHERSECONDS));
     	addSequential(new GearPullIn(PUSHERSECONDS));
