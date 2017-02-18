@@ -19,7 +19,7 @@ public class GearPullIn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	System.out.println("Starting GearPullIn");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,6 +37,7 @@ public class GearPullIn extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	// Once the command is done, stop the solenoid.
+    	System.out.println("Ending GearPullIn");
     	Robot.gearPusher.pusherOff();
     }
 

@@ -25,7 +25,7 @@ public class RopeGrabber extends Subsystem {
 	// 497 counts / 1 revolution (360 degrees)
 	private static final double DEGREES_PER_PULSE = 0.789;
 	
-	private static final double GRABBER_SPEED = .2;
+	private static final double GRABBER_SPEED = .3;
 
 	// Non-static variables
 	public static boolean isFinished = false;

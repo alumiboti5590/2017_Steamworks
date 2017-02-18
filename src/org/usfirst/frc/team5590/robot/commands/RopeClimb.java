@@ -22,6 +22,7 @@ public class RopeClimb extends Command {
     protected void initialize() {
     	System.out.println("Starting Climb");
     	Robot.ropeClimber.resetEncoder();
+    	Robot.compressor.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -39,6 +40,8 @@ public class RopeClimb extends Command {
     protected void end() {
     	System.out.println("Ending Climb");
     	Robot.ropeClimber.isFinished = false;
+    	Robot.compressor.start();
+    	
     }
 
     // Called when another command which requires one or more of the same

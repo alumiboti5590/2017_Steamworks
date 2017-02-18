@@ -18,7 +18,9 @@ public class RopeGrab extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("Starting RopeGrab");
     	Robot.ropeGrabber.resetEncoder();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,6 +38,7 @@ public class RopeGrab extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	// Set isFinished back
+    	System.out.println("Ending RopeGrab");
     	Robot.ropeGrabber.isFinished = false;
     	// Reset the peripheral
     	

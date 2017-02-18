@@ -1,9 +1,7 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-
-import org.usfirst.frc.team5590.robot.Robot;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -12,11 +10,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class RopeClimber extends Subsystem {
 	static Encoder climbEnc;
 	static SpeedController ropeSpeed;
+	static DigitalInput    safetySwitch;
 
 	// creates two variables that tell the signals and are equal to the ports
 	// they are in
 	private static final int ROTATIONAL_ENCODER_SIGNAL_INPUT = 0;
 	private static final int ROTATIONAL_ENCODER_SIGNAL_OUTPUT = 1;
+	private static final int SAFETY_SWITCH_PORT = 4;
 
 	// creates a variable for the speed controller PWM
 	private static final int ROPE_CLIMB_PWM = 2;
@@ -44,16 +44,14 @@ public class RopeClimber extends Subsystem {
 		ropeSpeed = new TalonSRX(ROPE_CLIMB_PWM);
 		
 		ropeSpeed.stopMotor();
-		
+		safetySwitch = new DigitalInput(SAFETY_SWITCH_PORT);
 	}
 
 	// sets the speed controller to a speed while the encoder count is less than
 	// a certain number
 	public void moveDistance(double inches) {
 		
-		Robot.compressor.stop();
-		
-		if ((Math.abs(climbEnc.getDistance() - inches) < ERROR_ALLOWED)) {
+		if ((Math.abs(climbEnc.getDistance() - inches) < ERROR_ALLOWED) || !(safetySwitch.get())) {
 			ropeSpeed.stopMotor();
 			isFinished = true;
 			return;
@@ -64,7 +62,8 @@ public class RopeClimber extends Subsystem {
 		validSpeed = ensureRange(1.0 * SPEED_MULTIPLIER, -1, 1);
 		ropeSpeed.set(validSpeed);
 		
-		System.out.println("Raw distance " + climbEnc.getDistance());
+		System.out.println("Raw distance " + climbEnc.getDistance() + "     " + inches);
+		
 	}
 
 	// resets the encoder count and sets the speed controller to 0

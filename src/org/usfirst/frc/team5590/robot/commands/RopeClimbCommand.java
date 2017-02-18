@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class RopeClimbCommand extends CommandGroup {
-	private static final double GRABBER_DEGREES = 155.0;
+	private static final double GRABBER_DEGREES = 325.0;
 	
     public RopeClimbCommand() {
     	 // Add Commands here:
@@ -15,8 +15,10 @@ public class RopeClimbCommand extends CommandGroup {
         // these will run in order.
     	
     	addSequential(new RopeGrab(GRABBER_DEGREES));
+    	addSequential(new Delay(.5), .5);
     	addSequential(new RopeClimb(11.0));
     	addSequential(new RopeGrab(-GRABBER_DEGREES));
     	addSequential(new RopeClimb(34.0));
+    	
     }
 }
