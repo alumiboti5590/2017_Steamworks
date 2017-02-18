@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class GearPusherCommand extends CommandGroup {
-    private static final double PUSHERSECONDS = 1;
-    private static final double HOLDERSECONDS = 1;
+    private static final double PUSHERSECONDS = 1.0;
+    private static final double HOLDERSECONDS = 1.0;
     
     
     public  GearPusherCommand() {
