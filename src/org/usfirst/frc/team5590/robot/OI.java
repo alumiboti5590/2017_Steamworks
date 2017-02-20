@@ -6,6 +6,7 @@ import org.usfirst.frc.team5590.robot.commands.GearPullIn;
 import org.usfirst.frc.team5590.robot.commands.GearPushOut;
 import org.usfirst.frc.team5590.robot.commands.GearPusherCommand;
 import org.usfirst.frc.team5590.robot.commands.RopeClimbCommand;
+import org.usfirst.frc.team5590.robot.commands.SwitchCamera;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
@@ -27,18 +28,12 @@ public class OI {
 		xbox = new XboxController(XBOX_PORT);
 		logitech = new LogitechX3(LOGITECH_PORT);
 		
-//		// pusher test
-//		logitech.button12.whenPressed(new GearPushOut(0.25));
-//		logitech.button11.whenPressed(new GearPullIn(0.25));
-//		
-//		// holder test
-//		logitech.button10.whenPressed(new GearHolderOpen(0.25));
-//		logitech.button9.whenPressed(new GearHolderClose(0.25));
+		// Switch the camera
+		xbox.buttonX.whenPressed(new SwitchCamera());
 		
-		//logitech.button10.whenPressed(new RopeGrab(-155));
 		logitech.button5.whenPressed(new GearPusherCommand());
-		//logitech.button8.whenPressed(new RopeGrab(155));
-		//logitech.button7.whenPressed(new RopeClimb(42.0));
+		
+		
 		logitech.button6.whenPressed(new RopeClimbCommand());
 		
 	}

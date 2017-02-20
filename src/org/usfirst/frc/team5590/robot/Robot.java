@@ -42,7 +42,8 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-		CameraServer.getInstance().startAutomaticCapture();
+		//CameraServer.getInstance().startAutomaticCapture();
+		BetterCameraServer.init("cam0", "cam1");
     }
 	
 	/**
