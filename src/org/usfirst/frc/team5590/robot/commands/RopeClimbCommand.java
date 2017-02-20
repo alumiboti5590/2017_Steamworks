@@ -18,7 +18,7 @@ public class RopeClimbCommand extends CommandGroup {
     	addSequential(new Delay(.5), .5);
     	addSequential(new RopeClimb(11.0));
     	addSequential(new RopeGrab(-GRABBER_DEGREES));
-    	addSequential(new RopeClimb(34.0));
+    	addSequential(new RopeClimb(40.0));
     	
     }
 }
