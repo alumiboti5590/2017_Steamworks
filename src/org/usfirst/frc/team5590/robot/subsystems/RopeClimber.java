@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5590.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -10,13 +11,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class RopeClimber extends Subsystem {
 	static Encoder climbEnc;
 	static SpeedController ropeSpeed;
-	static DigitalInput    safetySwitch;
+	public static AnalogInput    safetySwitch;
 
 	// creates two variables that tell the signals and are equal to the ports
 	// they are in
 	private static final int ROTATIONAL_ENCODER_SIGNAL_INPUT = 0;
 	private static final int ROTATIONAL_ENCODER_SIGNAL_OUTPUT = 1;
-	private static final int SAFETY_SWITCH_PORT = 4;
+	private static final int SAFETY_SWITCH_PORT = 0;
 
 	// creates a variable for the speed controller PWM
 	private static final int ROPE_CLIMB_PWM = 2;
@@ -44,14 +45,16 @@ public class RopeClimber extends Subsystem {
 		ropeSpeed = new TalonSRX(ROPE_CLIMB_PWM);
 		
 		ropeSpeed.stopMotor();
-		safetySwitch = new DigitalInput(SAFETY_SWITCH_PORT);
+		safetySwitch = new AnalogInput(SAFETY_SWITCH_PORT);
 	}
 
 	// sets the speed controller to a speed while the encoder count is less than
 	// a certain number
 	public void moveDistance(double inches) {
 		
-		if ((Math.abs(climbEnc.getDistance() - inches) < ERROR_ALLOWED) || !(safetySwitch.get())) {
+		//System.out.println(safetySwitch.get());
+		
+		if ((Math.abs(climbEnc.getDistance() - inches) < ERROR_ALLOWED) ||  safetySwitch.getVoltage() < 0.5) {
 			ropeSpeed.stopMotor();
 			isFinished = true;
 			return;
@@ -78,6 +81,11 @@ public class RopeClimber extends Subsystem {
 	// resets the encoder count
 	public void resetEncoder() {
 		climbEnc.reset();
+	}
+	
+	public void stop() {
+		climbEnc.reset();
+		ropeSpeed.stopMotor();
 	}
 
 
