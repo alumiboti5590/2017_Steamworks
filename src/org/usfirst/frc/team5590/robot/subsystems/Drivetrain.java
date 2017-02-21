@@ -2,8 +2,8 @@ package org.usfirst.frc.team5590.robot.subsystems;
 
 import org.usfirst.frc.team5590.robot.Robot;
 
-import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -23,9 +23,12 @@ public class Drivetrain extends Subsystem {
     private static final double DEADZONE_TOLERANCE_LEFT = .15;
     private static final double DEADZONE_TOLERANCE_RIGHT = .18;
     
+    private static final int DISTANCE_SENSOR_INPUT = 1;
+    
     // RobotDrive from FRC
     private RobotDrive robotDrive;
     private Gyro gyro;
+    public static AnalogInput distanceSensor;
     
     
     public Drivetrain(){
@@ -33,6 +36,7 @@ public class Drivetrain extends Subsystem {
     	robotDrive.setSafetyEnabled(false);
     	robotDrive.setExpiration(.1);
     	gyro = new AnalogGyro(1);
+    	distanceSensor = new AnalogInput(DISTANCE_SENSOR_INPUT);
     }
 
     
@@ -75,6 +79,7 @@ public class Drivetrain extends Subsystem {
     	double validSpeed = this.ensureRange(speed, MINSPEED, MAXSPEED);
     	
     	double angle = gyro.getAngle();
+    	System.out.println(angle);
     	robotDrive.drive(-validSpeed, -angle * KP);
     }
     

@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		//CameraServer.getInstance().startAutomaticCapture();
-		BetterCameraServer.init("cam0", "cam1");
+		//BetterCameraServer.init("cam0", "cam1");
     }
 	
 	/**
@@ -76,9 +76,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	
-    	drivetrain.setSpeed(.3);
-    	
+    	drivetrain.setSpeed(-0.3);
     }
 
     public void teleopInit() {
@@ -97,6 +95,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         drivetrain.joystickSpeed();
+        
+        System.out.println(Drivetrain.distanceSensor.getVoltage());
     }
     
     /**

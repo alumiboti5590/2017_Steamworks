@@ -1,5 +1,8 @@
 package org.usfirst.frc.team5590.robot.commands.autonomous;
 
+import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,9 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Turn extends Command {
    
-    double angle;
+	public Drivetrain drivetrain = Robot.drivetrain;
+    private double angle;
     
     public Turn(double angle) {	
+    	requires(drivetrain);
     	this.angle = angle;
     }
 

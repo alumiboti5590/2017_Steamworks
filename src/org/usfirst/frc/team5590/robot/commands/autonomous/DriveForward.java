@@ -1,19 +1,29 @@
 package org.usfirst.frc.team5590.robot.commands.autonomous;
 
+import org.usfirst.frc.team5590.robot.Robot;
+import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Drive extends Command {
+public class DriveForward extends Command {
+	
+	public Drivetrain drivetrain = Robot.drivetrain;
 
-    public Drive() {
+    public DriveForward(double time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(drivetrain);
+    	setTimeout(time);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+       	drivetrain.stop();
+    	System.out.println("Driving Forward");
+    	drivetrain.setSpeed(-0.3);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -22,11 +32,12 @@ public class Drive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
