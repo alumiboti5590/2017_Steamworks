@@ -27,8 +27,9 @@ public class Drivetrain extends Subsystem {
     
     // RobotDrive from FRC
     private RobotDrive robotDrive;
-    private Gyro gyro;
+    public Gyro gyro;
     public static AnalogInput distanceSensor;
+    
     
     
     public Drivetrain(){
@@ -109,6 +110,43 @@ public class Drivetrain extends Subsystem {
     	}
     	return speed;
     }
+    
+    public void resetGyro(){
+    	gyro.reset();
+    }
+    
+    public void turn(double angle, boolean turnRight){
+    	// Right turn
+    	if(turnRight){
+    		if(gyro.getAngle() < angle){
+    			
+    		}
+    		else{
+    			
+    		}
+    	}
+    	// Left turn
+    	else{
+    		if(gyro.getAngle() > angle){
+    			
+    		}
+    		else{
+    			
+    		}
+    		
+    	}
+    }
+    
+    public boolean driveUntilClose(double speed){
+    	if(distanceSensor.getVoltage() < 3.0){
+    		return true;
+    	}
+    	else{
+    		setSpeed(speed);
+    		return false;
+    	}
+    }
+    
     
     
 }

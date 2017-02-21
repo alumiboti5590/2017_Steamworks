@@ -6,7 +6,6 @@ import org.usfirst.frc.team5590.robot.commands.GearPullIn;
 import org.usfirst.frc.team5590.robot.commands.GearPushOut;
 import org.usfirst.frc.team5590.robot.commands.GearPusherCommand;
 import org.usfirst.frc.team5590.robot.commands.RopeClimbCommand;
-//import org.usfirst.frc.team5590.robot.commands.SwitchCamera;
 import org.usfirst.frc.team5590.robot.controllers.LogitechX3;
 import org.usfirst.frc.team5590.robot.controllers.XboxController;
 
@@ -28,8 +27,6 @@ public class OI {
 		xbox = new XboxController(XBOX_PORT);
 		logitech = new LogitechX3(LOGITECH_PORT);
 		
-		// Switch the camera
-//		xbox.buttonX.whenPressed(new SwitchCamera());
 		
 		logitech.button5.whenPressed(new GearPusherCommand());
 		
