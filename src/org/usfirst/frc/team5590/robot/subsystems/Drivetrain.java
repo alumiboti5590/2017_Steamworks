@@ -2,8 +2,8 @@ package org.usfirst.frc.team5590.robot.subsystems;
 
 import org.usfirst.frc.team5590.robot.Robot;
 
-import edu.wpi.first.wpilibj.AnalogAccelerometer;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -23,9 +23,12 @@ public class Drivetrain extends Subsystem {
     private static final double DEADZONE_TOLERANCE_LEFT = .15;
     private static final double DEADZONE_TOLERANCE_RIGHT = .18;
     
+    private static final int DISTANCE_SENSOR_INPUT = 1;
+    
     // RobotDrive from FRC
     private RobotDrive robotDrive;
-    private Gyro gyro;
+    public Gyro gyro;
+    //public static AnalogInput distanceSensor;
     
     
     public Drivetrain(){
@@ -33,6 +36,9 @@ public class Drivetrain extends Subsystem {
     	robotDrive.setSafetyEnabled(false);
     	robotDrive.setExpiration(.1);
     	gyro = new AnalogGyro(1);
+    	gyro.reset();
+    	gyro.calibrate();
+    	//distanceSensor = new AnalogInput(DISTANCE_SENSOR_INPUT);
     }
 
     
@@ -71,23 +77,40 @@ public class Drivetrain extends Subsystem {
      * in the drivetrain to whatever *speed* is.
      */
     public void setSpeed(double speed) {
-    	//This ensures that the speed received is valid
-    	double validSpeed = this.ensureRange(speed, MINSPEED, MAXSPEED);
+    	////This ensures that the speed received is valid
+    	//double validSpeed = this.ensureRange(speed, MINSPEED, MAXSPEED);
     	
-    	double angle = gyro.getAngle();
-    	robotDrive.drive(-validSpeed, -angle * KP);
+    	//double angle = gyro.getAngle();
+    	//robotDrive.drive(-validSpeed, -angle * KP);
+    	robotDrive.tankDrive(speed, speed + .05);
     }
     
     
     public boolean setSpeedandDistance(double speed, double distance){
     	return true;
     }
+    
+    
     /**
      * This method will be called to STOP the robot.
      */
     public void stop() {
     	this.setSpeed(0);
     	
+    }
+    
+    
+    public void resetGyro(){
+    	gyro.reset();
+    }
+    
+    public void turn(boolean isRight){
+    	if(isRight){
+    		robotDrive.tankDrive(0.5, -0.5);
+    	}
+    	else{
+    		robotDrive.tankDrive(-0.5, 0.5);
+    	}
     }
     
     

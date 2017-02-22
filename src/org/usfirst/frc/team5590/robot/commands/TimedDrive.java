@@ -7,30 +7,29 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Turn extends Command {
-   
-    private double time;
-    private boolean isRight;
-    
-    public Turn(double time, boolean isRight) {	
-    	requires(Robot.drivetrain);
+public class TimedDrive extends Command {
+	
+	private double speed;
+	private double time;
+	
+
+    public TimedDrive(double speed, double time) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	this.speed = speed;
     	this.time = time;
-    	this.isRight = isRight;
+    	requires(Robot.drivetrain);
     	setTimeout(this.time);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drivetrain.stop();
-    	
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.turn(isRight);
-    	
-    	
+    	Robot.drivetrain.setSpeed(this.speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

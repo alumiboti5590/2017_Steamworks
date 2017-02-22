@@ -1,15 +1,16 @@
 
 package org.usfirst.frc.team5590.robot;
 
+import org.usfirst.frc.team5590.robot.commands.MidGearAutoGroup;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5590.robot.subsystems.GearHolder;
 import org.usfirst.frc.team5590.robot.subsystems.GearPusher;
 import org.usfirst.frc.team5590.robot.subsystems.RopeClimber;
 import org.usfirst.frc.team5590.robot.subsystems.RopeGrabber;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -33,7 +34,8 @@ public class Robot extends IterativeRobot {
     public static final Compressor compressor = new Compressor();
     public static OI oi;
 
-    Command autonomousCommand;
+    // CHANGE ME FOR AUTONOMOUS
+    Command autonomousCommand = new MidGearAutoGroup();
     SendableChooser chooser;
 
     /**
@@ -75,8 +77,8 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	
-    	drivetrain.setSpeed(.3);
+    	Scheduler.getInstance().run();
+    	System.out.println(Robot.drivetrain.gyro.getAngle());
     	
     }
 
