@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team5590.robot;
 
+import org.usfirst.frc.team5590.robot.commands.LeftGearAutoGroup;
 import org.usfirst.frc.team5590.robot.commands.MidGearAutoGroup;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5590.robot.subsystems.GearHolder;
@@ -35,7 +36,7 @@ public class Robot extends IterativeRobot {
     public static OI oi;
 
     // CHANGE ME FOR AUTONOMOUS
-    Command autonomousCommand = new MidGearAutoGroup();
+    Command autonomousCommand = new LeftGearAutoGroup();
     SendableChooser chooser;
 
     /**
@@ -78,7 +79,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
     	Scheduler.getInstance().run();
-    	System.out.println(Robot.drivetrain.gyro.getAngle());
+    	//System.out.println(Robot.drivetrain.gyro.getAngle());
     	
     }
 

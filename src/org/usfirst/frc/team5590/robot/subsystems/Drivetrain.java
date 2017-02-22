@@ -106,10 +106,10 @@ public class Drivetrain extends Subsystem {
     
     public void turn(boolean isRight){
     	if(isRight){
-    		robotDrive.tankDrive(0.5, -0.5);
+    		robotDrive.tankDrive(0.3, -0.3);
     	}
     	else{
-    		robotDrive.tankDrive(-0.5, 0.5);
+    		robotDrive.tankDrive(-0.3, 0.3);
     	}
     }
     
