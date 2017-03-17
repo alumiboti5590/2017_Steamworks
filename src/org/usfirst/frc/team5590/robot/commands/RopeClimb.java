@@ -5,7 +5,8 @@ import org.usfirst.frc.team5590.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command class that uses methods from the RopeClimber class to control how 
+ * far the climber will go
  */
 public class RopeClimb extends Command {
 

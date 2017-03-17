@@ -5,7 +5,8 @@ import org.usfirst.frc.team5590.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * This command class is designed to open the doors holding the gear
+ * using methods from the GearHolder class
  */
 public class GearHolderOpen extends Command {
 

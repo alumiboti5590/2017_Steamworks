@@ -5,7 +5,8 @@ import org.usfirst.frc.team5590.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command that takes speed and time as fields and drives the robot 
+ * at that given speed for that given time in autonomous
  */
 public class TimedDrive extends Command {
 	

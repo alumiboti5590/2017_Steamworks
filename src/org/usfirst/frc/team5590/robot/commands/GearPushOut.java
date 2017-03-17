@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Command class that pulls in the gear pusher using methods from the GearPusher class
  */
 public class GearPushOut extends Command {
 

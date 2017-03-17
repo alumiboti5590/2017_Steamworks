@@ -3,7 +3,7 @@ package org.usfirst.frc.team5590.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Command chain which is used for the autonomous gear delivery process
  */
 public class GearPusherAutoCommand extends CommandGroup {
     private static final double PUSHERSECONDS = 0.25;

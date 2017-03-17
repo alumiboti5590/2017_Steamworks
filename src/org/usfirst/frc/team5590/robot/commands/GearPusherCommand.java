@@ -3,7 +3,7 @@ package org.usfirst.frc.team5590.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Command chain to be used for gear delivery during the teleop stage of play
  */
 public class GearPusherCommand extends CommandGroup {
     private static final double PUSHERSECONDS = 0.25;

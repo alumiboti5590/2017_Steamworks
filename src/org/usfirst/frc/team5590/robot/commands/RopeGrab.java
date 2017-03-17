@@ -5,7 +5,7 @@ import org.usfirst.frc.team5590.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command class that controls the rope grabber using methods from the RopeGrabber class
  */
 public class RopeGrab extends Command {
 	

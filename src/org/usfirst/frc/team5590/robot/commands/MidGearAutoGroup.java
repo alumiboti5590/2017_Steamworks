@@ -3,7 +3,7 @@ package org.usfirst.frc.team5590.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Autonomous command chain to be used when starting in the middle of the field
  */
 public class MidGearAutoGroup extends CommandGroup {
 
@@ -25,7 +25,7 @@ public class MidGearAutoGroup extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addSequential(new GearHolderClose(.3), .3);
-    	addSequential(new TimedDrive(.7, 1.1), 1.1);
+    	addSequential(new TimedDrive(.7, 1.0), 1.0);
     	addSequential(new GearPusherAutoCommand(), 2.3);
     	addSequential(new TimedDrive(-.5, .8), .8);
     	

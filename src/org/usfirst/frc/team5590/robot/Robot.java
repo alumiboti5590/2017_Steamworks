@@ -3,6 +3,7 @@ package org.usfirst.frc.team5590.robot;
 
 import org.usfirst.frc.team5590.robot.commands.LeftGearAutoGroup;
 import org.usfirst.frc.team5590.robot.commands.MidGearAutoGroup;
+import org.usfirst.frc.team5590.robot.commands.StraightAutoGroup;
 import org.usfirst.frc.team5590.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team5590.robot.subsystems.GearHolder;
 import org.usfirst.frc.team5590.robot.subsystems.GearPusher;
@@ -26,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Robot extends IterativeRobot {
 
-
+	// All subsystems needed by the robot
     public static final Drivetrain drivetrain = new Drivetrain();
     public static final GearHolder gearHolder = new GearHolder();
     public static final GearPusher gearPusher = new GearPusher();
@@ -36,7 +37,7 @@ public class Robot extends IterativeRobot {
     public static OI oi;
 
     // CHANGE ME FOR AUTONOMOUS
-    Command autonomousCommand = new LeftGearAutoGroup();
+    Command autonomousCommand = new StraightAutoGroup();
     SendableChooser chooser;
 
     /**
@@ -45,6 +46,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		CameraServer.getInstance().startAutomaticCapture();
 		CameraServer.getInstance().startAutomaticCapture();
     }
 	

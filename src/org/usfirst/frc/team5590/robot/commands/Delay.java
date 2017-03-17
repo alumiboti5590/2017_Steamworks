@@ -5,7 +5,7 @@ import org.usfirst.frc.team5590.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * This command class is designed to set a delay between actions conducted in the autonomous setting of the robot
  */
 public class Delay extends Command {
 	

@@ -3,7 +3,7 @@ package org.usfirst.frc.team5590.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Autonomous command chain for use when starting on the left side of the field
  */
 public class LeftGearAutoGroup extends CommandGroup {
 

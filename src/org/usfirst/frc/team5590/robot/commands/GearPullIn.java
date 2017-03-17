@@ -5,7 +5,8 @@ import org.usfirst.frc.team5590.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * This command class is designed to pull in the gear pusher
+ * using methods from the GearPusher class
  */
 public class GearPullIn extends Command {
 

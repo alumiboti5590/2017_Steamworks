@@ -30,7 +30,7 @@ public class Drivetrain extends Subsystem {
     public Gyro gyro;
     //public static AnalogInput distanceSensor;
     
-    
+    // Constructs the drivetrain on the robot
     public Drivetrain(){
     	robotDrive = new RobotDrive(LEFTCONTROLLERPWM, RIGHTCONTROLLERPWM);
     	robotDrive.setSafetyEnabled(false);
@@ -104,6 +104,7 @@ public class Drivetrain extends Subsystem {
     	gyro.reset();
     }
     
+    // Method used to turn the robot. Used in Turn command
     public void turn(boolean isRight){
     	if(isRight){
     		robotDrive.tankDrive(0.3, -0.3);

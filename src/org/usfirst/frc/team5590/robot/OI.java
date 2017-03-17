@@ -31,14 +31,19 @@ public class OI {
 		logitech.button12.whenPressed(new GearPushOut(0.25));
 		logitech.button11.whenPressed(new GearPullIn(0.25));
 		
-		// holder test
+		// holder manual controls in case gear needs to be loaded manually
 		logitech.button10.whenPressed(new GearHolderOpen(0.25));
 		logitech.button9.whenPressed(new GearHolderClose(0.25));
 		
 		//logitech.button10.whenPressed(new RopeGrab(-155));
+		
+		// Executes gear pusher command sequence when pressed
 		logitech.button5.whenPressed(new GearPusherCommand());
+		
 		//logitech.button8.whenPressed(new RopeGrab(155));
 		//logitech.button7.whenPressed(new RopeClimb(42.0));
+		
+		// Executes rope climb command sequence when pressed
 		logitech.button6.whenPressed(new RopeClimbCommand());
 		
 	}

@@ -25,7 +25,7 @@ public class RopeGrabber extends Subsystem {
 	// 497 counts / 1 revolution (360 degrees)
 	private static final double DEGREES_PER_PULSE = 0.789;
 	
-	private static final double GRABBER_SPEED = .3;
+	private static final double GRABBER_SPEED = .7;
 
 	// Non-static variables
 	public static boolean isFinished = false;
@@ -78,15 +78,18 @@ public class RopeGrabber extends Subsystem {
 	public void resetGrabEnc() {
 
 	}
-
-	public int getEncoder() {
+	
+	// Gets the value that the encoder is currently reading
+	 public int getEncoder() {
 		return grabEnc.get();
 	}
-
+	 
+	// Resets the encoder from it's current value to 0
 	public void resetEncoder() {
 		grabEnc.reset();
 	}
-
+	
+	// Gets the amount of degrees that the encoder is reading
 	public double getDegrees() {
 		return DEGREES_PER_PULSE * grabEnc.get();
 	}

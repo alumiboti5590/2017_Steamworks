@@ -5,7 +5,8 @@ import org.usfirst.frc.team5590.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command used to turn the robot in autonomous, after testing we found that this may not be 
+ * needed based on the starting position of the robot on the field
  */
 public class Turn extends Command {
    

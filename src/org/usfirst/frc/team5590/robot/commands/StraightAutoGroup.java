@@ -3,7 +3,7 @@ package org.usfirst.frc.team5590.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ *	Test command for driving the robot straight in autonomous
  */
 public class StraightAutoGroup extends CommandGroup {
 
@@ -24,7 +24,7 @@ public class StraightAutoGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new TimedDrive(.7, 1.5), 1.5);
+    	addSequential(new TimedDrive(.7, 1.1), 1.1);
     	
     }
 }

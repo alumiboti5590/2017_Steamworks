@@ -55,7 +55,7 @@ public class RopeClimber extends Subsystem {
 		//System.out.println(safetySwitch.get());
 		
 		if ((Math.abs(climbEnc.getDistance() - inches) < ERROR_ALLOWED) ||  safetySwitch.getVoltage() < 0.5) {
-			ropeSpeed.set(.7);
+			ropeSpeed.set(0.7);
 			isFinished = true;
 			return;
 		}
@@ -73,7 +73,8 @@ public class RopeClimber extends Subsystem {
 	public void resetWinch() {
 
 	}
-
+	
+	// Gets the value that the encoder is currently reading. Used for testing purposes
 	public int getEncoder() {
 		return climbEnc.get();
 	}
@@ -83,6 +84,7 @@ public class RopeClimber extends Subsystem {
 		climbEnc.reset();
 	}
 	
+	// Stops the climber
 	public void stop() {
 		climbEnc.reset();
 		ropeSpeed.stopMotor();
