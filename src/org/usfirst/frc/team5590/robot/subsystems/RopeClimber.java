@@ -55,7 +55,7 @@ public class RopeClimber extends Subsystem {
 		//System.out.println(safetySwitch.get());
 		
 		if ((Math.abs(climbEnc.getDistance() - inches) < ERROR_ALLOWED) ||  safetySwitch.getVoltage() < 0.5) {
-			ropeSpeed.set(0.7);
+			ropeSpeed.set(0.25);
 			isFinished = true;
 			return;
 		}
